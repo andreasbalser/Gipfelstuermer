@@ -24,26 +24,50 @@
     <!-- Main Content Section -->
     <main class="main">
         <div class="container">
-            <h2>Share Your Message</h2>
-            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <input type="file" name="image" accept="image/*">
-                <button type="submit">Submit</button>
-            </form>
-
-            <h2>Submissions</h2>
+            <h2>Gipfelbuch</h2>
             <div id="submissions">
                 {% for submission in submissions %}
-                    <div class="submission">
-                        <h3>{{ submission.name }}</h3>
-                        <p>{{ submission.message }}</p>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <h3 class="entry-title">{{ submission.start }}</h3>
+                            <p>hier abgegeben am 4.Nov 2024</p>
+                        </div>
+                        <div class="entry-bearer">
+                            <img>
+                            <p>{{ submission.name }} <br/>hat mich weitergetragen</p>
+                        </div>
+                        <p class="entry-comment">
+                            {{ submission.message }}
+                        </p>
                         {% if submission.image %}
-                            <img src="{{ url_for('static', filename=submission.image) }}" alt="Image uploaded by {{ submission.name }}" width="200">
+                        <div class="entry-images-container">
+                            {% for image in submission.image %}
+                            <img src="{{ url_for('static', filename=submission.image) }}" alt="Image uploaded by {{ submission.name }}">
+                            {% endfor %}
+                        </div>
                         {% endif %}
                     </div>
                 {% endfor %}
             </div>
+
+            <div id="newentry-cta">
+                <h3>Jetzt kommt es auf dich an!</h3>
+                <p>Du hast mich gerade gefunden? Glückwunsch! Dann nimm mich mit zum nächsten Gipfel und trage dich in mein Gipfelbuch
+                    ein. Und denk dran: Mein Überleben hängt von dir ab!</p>
+                <button id="newentry-cta" onclick="showNewEntryForm()">Eintrag erstellen</button>
+            </div>
+
+            <div id="newentry-form">
+                <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="text" name="start" placeholder="Fundort" required>
+                    <input type="text" name="destination" placeholder="Abgabeort" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <input type="file" name="image" accept="image/*">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            
         </div>
     </main>
 

@@ -12,8 +12,8 @@
     --text-color: #333;
     --bg-color: #f4f4f4;
     --font-size-large: 2rem;
-    --font-size-medium: 1.5rem;
-    --font-size-small: 1rem;
+    --font-size-medium: 16px;
+    --font-size-small: 14px;
 }
 
 /* Body Styling */
@@ -66,6 +66,21 @@ body {
     margin-bottom: 20px;
 }
 
+button {
+    background-color: #0073FF;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
 /* Form Styling */
 form input, form textarea {
     width: 100%;
@@ -95,6 +110,104 @@ form button:hover {
     padding: 20px 0;
     text-align: center;
     font-size: var(--font-size-small);
+}
+
+/* Entry Styling */
+#submissions{
+    display: flex;
+    flex-direction: column;
+}
+
+.entry {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 16px;
+}
+
+.entry > * {
+    font-size: var(--font-size-medium);
+}
+
+.entry-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    padding: 0, 0, 24px, 0;
+}
+
+.entry-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.entry-header > p {
+    font-size: var(--font-size-small);
+    font-style: italic;
+    color: gray;
+}
+
+.entry-bearer {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+
+    font-style: italic;
+}
+
+.entry-bearer > img {
+    height: 28px;
+}
+
+.entry-comment {
+    font-style: italic;
+    color: gray;
+}
+
+.entry-images-container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    overflow-x: scroll;
+}
+
+.entry-images-container > img {
+    height: 200px;
+    border-radius: 8px;
+}
+
+/* Form & CTA styling */
+#newentry-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 8px;
+
+    font-size: var(--font-size-medium);
+
+    background-color: lightgray;
+    border-radius: 8px;
+}
+
+#newentry-cta > button {
+    background-color: #0073FF;
+}
+
+#newentry-cta > h3 {
+    font-weight: bold;
+}
+
+#newentry-cta > p {
+}
+
+#newentry-form {
+    display: none;
 }
 
 /* Responsive Design */

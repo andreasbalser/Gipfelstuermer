@@ -19,3 +19,7 @@ contactForm.addEventListener('submit', function (event) {
         alert('Please fill out all fields.');
     }
 });
+
+function showNewEntryForm() {
+    document.getElementById('newentry-form').style.display = "inline"
+}
