@@ -6,66 +6,101 @@
     <title>Gipfelstürmer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend:wght@100..900&display=swap"
+        rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    </head>
 <body>
 
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <h1 class="title">Hi! I am Gipfelstürmer</h1>
-            <nav class="navbar">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
+    <header>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
+
+    <!-- Headline Section -->
+    <div class="header">
+        
+        <div class="container">
+    
+            <h1 class="title">I am Gipfelstürmer</h1>
+            <p>
+                With Apple Trade In, you can get a great value for your current device and apply it toward a new one. And
+                you can do
+                it all online or at an Apple Store. If your device isn’t eligible for credit, we’ll recycle it for free.
+                It’s a
+                great deal for you and the planet.
+            </p>
+    
+        </div>
+    </div>
 
     <!-- Main Content Section -->
     <main class="main">
         <div class="container">
-            <h2>Gipfelbuch</h2>
+            <h1>Gipfelbuch</h1>
             <div id="submissions">
-                {% for submission in submissions %}
+                {% if submissionsLayout|length == 0 %}
+                <p>no entries yet</p>
+                {% endif %}
+                {% for submission in submissionsLayout %}
                     <div class="entry">
                         <div class="entry-header">
+                            <img src="static\assets\gipfel_icon.svg" width="24px">
                             <h3 class="entry-title">{{ submission.start }}</h3>
-                            <p>hier abgegeben am 4.Nov 2024</p>
                         </div>
+                        <p>hier abgegeben am: </p>
                         <div class="entry-bearer">
-                            <img>
-                            <p>{{ submission.name }} <br/>hat mich weitergetragen</p>
+                            <p><b>{{ submission.name }}</b> hat mich weitergetragen</p>
                         </div>
-                        <p class="entry-comment">
-                            {{ submission.message }}
-                        </p>
-                        {% if submission.image %}
+                        {% if submission.message %}
+                        <div class="entry-comment">
+                            <p>Kommentar:</p>
+                            <p>{{ submission.message }}</p>
+                        </div>
+                        {% endif %}
+                        {% if submission.images %}
                         <div class="entry-images-container">
-                            {% for image in submission.image %}
-                            <img src="{{ url_for('static', filename=submission.image) }}" alt="Image uploaded by {{ submission.name }}">
+                            {% for image in submission.images %}
+                            <img src="{{ url_for('static', filename=image) }}" alt="Image uploaded by {{ submission.name }}">
                             {% endfor %}
                         </div>
                         {% endif %}
                     </div>
                 {% endfor %}
+
+                <div id="newentry-cta">
+                    <h2>Jetzt kommt es auf dich an!</h2>
+                    <p>Du hast mich gerade gefunden? Glückwunsch! Dann nimm mich mit zum nächsten Gipfel und trage dich in mein Gipfelbuch
+                        ein. Und denk dran: Mein Überleben hängt von dir ab!</p>
+                    <button class="button-primary" onclick="showNewEntryForm()">Eintrag erstellen</button>
+                </div>
             </div>
 
-            <div id="newentry-cta">
-                <h3>Jetzt kommt es auf dich an!</h3>
-                <p>Du hast mich gerade gefunden? Glückwunsch! Dann nimm mich mit zum nächsten Gipfel und trage dich in mein Gipfelbuch
-                    ein. Und denk dran: Mein Überleben hängt von dir ab!</p>
-                <button id="newentry-cta" onclick="showNewEntryForm()">Eintrag erstellen</button>
-            </div>
-
-            <div id="newentry-form">
-                <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="text" name="start" placeholder="Fundort" required>
-                    <input type="text" name="destination" placeholder="Abgabeort" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <input type="file" name="image" accept="image/*">
-                    <button type="submit">Submit</button>
-                </form>
+            <div class="overlay" id="modal">
+                <div class="modal-content">
+                    <h2>Eintrag erstellen</h2>
+                    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="text" name="start" placeholder="Fundort" required>
+                        <input type="text" name="destination" placeholder="Abgabeort" required>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <input type="file" name="images" accept="image/*" multiple>
+                        <button type="reset" class="button-secondary" onclick="closeNewEntryForm()">Close</button>
+                        <button type="submit" class="button-primary">Submit</button>
+                    </form>
+                </div>
             </div>
             
         </div>

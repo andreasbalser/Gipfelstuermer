@@ -5,47 +5,98 @@
     box-sizing: border-box;
 }
 
-/* Root Variables for Colors and Font Sizes */
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
+    --primary-color: #305221;
+    --secondary-color: #566151;
     --text-color: #333;
     --bg-color: #f4f4f4;
-    --font-size-large: 2rem;
+}
+
+@media (min-width: 768px) {
+    /* Root Variables for Colors and Font Sizes */
+    :root {
+        --font-size-verylarge: 64px;
+        --font-size-large: 24px;
+        --font-size-medium: 17px;
+        --font-size-small: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+    --font-size-verylarge: 42px;
+    --font-size-large: 20px;
     --font-size-medium: 16px;
-    --font-size-small: 14px;
+    --font-size-small: 11px;
+    }
 }
 
 /* Body Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lato", Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 
-/* Container for Content Alignment */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+h1 {
+    font-family: "Sour Gummy", Arial, sans-serif;
+    font-size: var(--font-size-verylarge);
+    text-align: center;
+    padding: 24px 0;
 }
 
-/* Header Styling */
+h2 {
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    color: var(--text-color);
+}
+
+p {
+    font-size: var(--font-size-medium);
+}
+
+/* Container for Content Alignment */
+.container {
+    width: 70%;
+    max-width: 1200px;
+    min-width: 320px;
+
+    margin: 0 auto;
+    padding: 16px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid gray;
+}
+
+/* Headline Styling */
 .header {
-    background-color: var(--primary-color);
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     padding: 20px 0;
-    color: #fff;
     text-align: center;
 }
 
-.header .title {
+.header p {
     font-size: var(--font-size-large);
-    margin-bottom: 10px;
+}
+
+.header .title {
+    font-size: var(--font-size-verylarge);
 }
 
 .navbar a {
-    color: #fff;
+    color: var(--text-color);
+    font-size: var(--font-size-small);
     margin: 0 10px;
     text-decoration: none;
 }
@@ -60,44 +111,47 @@ body {
     text-align: center;
 }
 
-.section h2 {
-    font-size: var(--font-size-medium);
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-button {
-    background-color: #0073FF;
+.button-primary {
+    background-color: var(--primary-color);
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 12px;
     text-align: center;
     text-decoration: none;
+    font-weight: default;
     display: inline-block;
     font-size: var(--font-size-medium);
-    font-weight: bold;
-    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.button-secondary {
+    background-color: lightgray;
+    border: none;
+    color: black;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: default;
+    display: inline-block;
+    font-size: var(--font-size-medium);
     cursor: pointer;
     border-radius: 8px;
 }
 
 /* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
 form input, form textarea {
-    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-form button {
-    padding: 10px 20px;
-    background-color: var(--secondary-color);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 form button:hover {
     background-color: #27ae60;
@@ -105,8 +159,6 @@ form button:hover {
 
 /* Footer Styling */
 .footer {
-    background-color: var(--primary-color);
-    color: #fff;
     padding: 20px 0;
     text-align: center;
     font-size: var(--font-size-small);
@@ -116,6 +168,10 @@ form button:hover {
 #submissions{
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    margin: auto;
+    max-width: 600px;
 }
 
 .entry {
@@ -123,21 +179,29 @@ form button:hover {
     flex-direction: column;
     gap: 12px;
 
-    padding: 16px;
+    width: 100%;
+    padding: 16px 0 16px 48px;
 }
 
 .entry > * {
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
 }
 
 .entry-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    position: relative;
 
-    padding: 0, 0, 24px, 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
 }
+
+.entry-header > img {
+    position: absolute;
+    left: -48px;
+    top: 10px;
+  }
 
 .entry-title {
     font-size: 32px;
@@ -152,20 +216,17 @@ form button:hover {
 
 .entry-bearer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 12px;
-    align-items: center;
+    align-items: flex-start;
 
     font-style: italic;
 }
 
-.entry-bearer > img {
-    height: 28px;
-}
-
-.entry-comment {
+.entry-comment > * {
     font-style: italic;
     color: gray;
+    font-size: var(--font-size-small);
 }
 
 .entry-images-container {
@@ -174,6 +235,7 @@ form button:hover {
     gap: 4px;
 
     overflow-x: scroll;
+    border-radius: 8px;
 }
 
 .entry-images-container > img {
@@ -186,41 +248,65 @@ form button:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
 
-    padding: 8px;
+    padding: 24px;
+    margin-top: 48px;
 
     font-size: var(--font-size-medium);
 
-    background-color: lightgray;
-    border-radius: 8px;
-}
-
-#newentry-cta > button {
-    background-color: #0073FF;
+    background-color: #e8e8e8;
+    border: 1px solid gray;
+    border-radius: 16px;
 }
 
 #newentry-cta > h3 {
     font-weight: bold;
 }
 
-#newentry-cta > p {
-}
+/* Backdrop overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it appears above everything else */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Fully transparent initially */
+    transition: visibility 0s, opacity 0.3s ease;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
-#newentry-form {
-    display: none;
-}
+    width: 70%;
+    max-width: 600px;
+  }
+  
+  /* Show the modal */
+  .overlay.show {
+    visibility: visible;
+    opacity: 1;
+  }  
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header .title {
-        font-size: 1.5rem;
+
+    .container {
+        width: 100%;
     }
 
-    .section {
-        padding: 20px 0;
-    }
-
-    form input, form textarea {
-        padding: 8px;
+    #submissions {
+        max-width: none;
     }
 }

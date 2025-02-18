@@ -20,6 +20,13 @@ contactForm.addEventListener('submit', function (event) {
     }
 });
 
+// Function to open the modal
 function showNewEntryForm() {
-    document.getElementById('newentry-form').style.display = "inline"
-}
+    document.getElementById('modal').classList.add('show');
+  }
+  
+  // Function to close the modal
+  function closeNewEntryForm() {
+    document.getElementById('modal').classList.remove('show');
+  }
+  
